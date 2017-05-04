@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+                <meta http-equiv="x-ua-compatible" content="ie=EmulateIE8">
+		<meta name="viewport" content="width=device-width" initial-scale="1">		<title>轮播</title>
+	</head>
+	<style type="text/css">
+	*::selection
+	{
+		background: none;
+	}
+		body,ul,li
+		{
+			margin: 0px;
+			padding:0px;
+			list-style: none;
+		}
+		#box
+		{
+			width: 1050px;
+			height: 320px;
+			position: relative;
+			margin: 100px auto;
+		}
+		ul img
+		{
+			width: 100%;
+			height: 100%;
+		}
+		ul li
+		{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			transition:1s; /*兼容*/
+			opacity: 0;/*重点*/
+		}
+		ul li:first-child
+		{
+			opacity: 1;
+		}
+		.btn
+		{
+	width: 100px;
+	height: 45px;
+	 
+	color: white;
+	position: absolute;
+	top: 135px;
+	text-align: center;
+	line-height: 45px;
+	cursor: pointer;
+		}
+		#next
+		{
+			right: 0px;
+		}
+	 
+	</style>
+	<body>
+		<div id="box">
+			<ul>
+				<li><img src="8.png"></li>
+				<li><img src="9.jpg"></li>
+				<li><img src="7.png"></li>
+				<li><img src="10.jpg"></li>
+			</ul>
+			<div class="btn" id="prev"  ><img src="prev.png"></div>
+			<div class="btn" id="next"  > <img src="next.png"></div>
+		</div>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+		
+			var li=document.getElementsByTagName("li");
+		
+			
+			
+			var index=0;
+			var oldLi=li[0];
+			var newLi;
+		
+			
+			function next()
+			{
+				oldLi.style.opacity=0;
+				
+				index++;
+				if(index==li.length)
+				{
+					index=0;
+				}
+				
+				/*
+				for(var i=0; i<li.length;i++)
+					{
+						li[i].style.opacity=0;
+					}
+					li[index].style.opacity=1;*/
+					newLi=li[index];
+					console.log(index);
+					newLi.style.opacity=1;
+					oldLi=li[index];
+				}
+			
+				
+				
+			function prev()
+				{
+					oldLi.style.opacity=0;
+					index--;
+					if(index==-1)
+					{
+						index=li.length-1;
+					}
+					console.log(index);/*
+					for(var i=0; i<li.length;i++)
+						{
+							li[i].style.opacity=0;
+						}
+						li[index].style.opacity=1;*/
+						newLi=li[index];
+						newLi.style.opacity=1;
+						oldLi=li[index];
+				}
+					
+					$("#prev").click(
+						function()
+						{
+							prev();
+						})
+					$("#next").click(
+						function()
+						{
+							next();
+						})
+						
+					
+				
+				$("#box").hover(function() {
+				clearInterval(lunbo);
+				}, function() {
+				lunbo= setInterval(function() {
+				next();
+				}, 2000);
+				}).trigger("mouseleave");
+				
+				</script>
+			</body>
+		</html>
